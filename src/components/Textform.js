@@ -4,22 +4,13 @@ export default function Textfrom(props) {
   const [text, setText] = useState("");
   const handleOnChange= (event)=>{
     setText(event.target.value)
-    //console.log({text});
   }
 
   const handleOnClickCopy = ()=>{
-   
-      var copyText = document.getElementById("myBox");
-  
-      
+      var copyText = document.getElementById("myBox");    
       copyText.select();
-      copyText.setSelectionRange(0, 99999); // For mobile devices
-    
-      
+      copyText.setSelectionRange(0, 99999); // For mobile devices      
       navigator.clipboard.writeText(copyText.value);
-    
-   
-    
   }
   const handleOnClickUpper= ()=>{
     let newText = text.toUpperCase();
@@ -45,17 +36,14 @@ export default function Textfrom(props) {
             len++;
            }
          })
-
          document.getElementById("word-frequency").innerHTML = "Frequency of '"+ word+ "' : " + len;
    }
-
 
   return (
     <div>
       <h1 className="my-3">{props.heading}</h1>
         <div className="mb-3">
-            
-            <textarea className="form-control" id="myBox"  value={text} onChange={handleOnChange}  rows="7"></textarea> 
+            <textarea className={`form-control bg-${props.mode} text-${props.mode==='light'?'dark':'light'}`} id="myBox"  value={text} onChange={handleOnChange}  rows="7"></textarea> 
         </div>
         <button className="btn btn-primary mx-2" onClick={handleOnClickUpper}>Uppercase</button>
         <button className="btn btn-primary mx-2" onClick={handleOnClickLower}>Lowercase</button>
@@ -63,7 +51,6 @@ export default function Textfrom(props) {
         <button className="btn btn-primary mx-2" onClick={handleOnClickCopy}>Copy</button>
 
         <input type="text" name="frequency" onChange={handleOnClickFrequency} placeholder="Find frequency"></input>
-        {/* <button className="btn btn-primary mx-5" onClick={handleOnClickFrequency}>Frequency</button> */}
         <div className="container my-4">
             <h1>Text summary:</h1>
             <p>Words : {text.split(" ").length-1} , Characters : {text.length}</p>
@@ -71,7 +58,7 @@ export default function Textfrom(props) {
             <p id="word-frequency">  </p>
 
             <h2>Preview: </h2>
-            <p>{text}</p>
+            <p>{text.length===0?"Enter text to preview":text}</p>
         </div>
     </div> 
   )
