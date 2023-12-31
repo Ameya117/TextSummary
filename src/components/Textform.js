@@ -3,7 +3,7 @@ import React,{useState} from 'react'
 export default function Textfrom(props) {
   const [text, setText] = useState("");
   const handleOnChange= (event)=>{
-    setText(event.target.value)
+    setText(event.target.value);
   }
 
   const handleOnClickCopy = ()=>{
@@ -11,14 +11,17 @@ export default function Textfrom(props) {
       copyText.select();
       copyText.setSelectionRange(0, 99999); // For mobile devices      
       navigator.clipboard.writeText(copyText.value);
+      props.showAlert("Text copied","success");
   }
   const handleOnClickUpper= ()=>{
     let newText = text.toUpperCase();
+    props.showAlert("Converted to Uppercase","success");
     setText(newText);
   }
 
   const handleOnClickLower= ()=>{
     let newText = text.toLocaleLowerCase();
+    props.showAlert("Converted to Lowercase","success");
     setText(newText);
   }
 
@@ -28,8 +31,6 @@ export default function Textfrom(props) {
    const handleOnClickFrequency = (event)=>{
     const word = event.target.value;
     let textArray = text.split(" ");
-    console.log(word);
-    console.log(textArray);
     let len =0;
     textArray.forEach((temp)=>{
            if(word===temp){
@@ -50,7 +51,7 @@ export default function Textfrom(props) {
         <button className="btn btn-primary mx-2" onClick={handleOnClickClear}>Clear</button>
         <button className="btn btn-primary mx-2" onClick={handleOnClickCopy}>Copy</button>
 
-        <input type="text" name="frequency" onChange={handleOnClickFrequency} placeholder="Find frequency"></input>
+        <input className="rounded" type="text" name="frequency" onChange={handleOnClickFrequency} placeholder="Find frequency"></input>
         <div className="container my-4">
             <h1>Text summary:</h1>
             <p>Words : {text.split(" ").length-1} , Characters : {text.length}</p>

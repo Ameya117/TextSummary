@@ -3,7 +3,7 @@ import React from 'react'
 export default function About(props) {
 
     return (
-        <div className="container" style= {props.myStyle} >
+        <div className="container rounded py-3 my-2" style= {props.myStyle} >
             <h1>About Us</h1>
             <div class="accordion" id="accordionExample" style={props.myStyle}>
                 <div class="accordion-item">
